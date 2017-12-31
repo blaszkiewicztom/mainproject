@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>email</th>
+            <th>company</th>
+            <th>nip</th>
+            <th>regon</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ users.id }}</td>
+                <td>{{ users.email }}</td>
+                <td>{{ users.company }}</td>
+                <td>{{ users.nip }}</td>
+                <td>{{ users.regon }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

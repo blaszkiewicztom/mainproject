@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="container" style="margin-top: 22px">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                {% for msg in app.session.flashBag.get('register_success') %}
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Sukces!</h4>
+                            <p>{{ msg }}</p>
+                {% endfor %}
+                {% for msg in app.session.flashBag.get('register_success_info') %}
+                        <hr>
+                        <p class="mb-0">{{ msg }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="jumbotron">
+                    {{ form_start(login_form) }}
+                    {% if error %}
+                        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                        <div class="form-group">{{ form_row(login_form._email, {'attr': {'class': 'form-control'}}) }}</div>
+                        <div class="form-group">{{ form_row(login_form._password, {'label': 'Hasło','attr': {'class': 'form-control'}}) }}</div>
+                        <button type="submit" class="btn btn-primary">Zaloguj</button>
+                    {{ form_end(login_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

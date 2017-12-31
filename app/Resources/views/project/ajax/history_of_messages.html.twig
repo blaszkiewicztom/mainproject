@@ -1,0 +1,46 @@
+<div id="accordion" role="tablist" aria-multiselectable="true">
+{% for key, value in historyOfMessages %}
+
+    <div class="card">
+        <div class="card-header" role="tab" id="headingOne">
+            <h5 class="mb-0">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+                    {#key is an email#}
+                    {{ key }}
+                </a>
+            </h5>
+        </div>
+
+        <div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="heading{{ loop.index }}">
+            <div class="card-block">
+                <div class="list-group">
+                    {# value is a messages array #}
+                    {% for msg in value %}
+
+                        <div class="list-group-item flex-column align-items-start">
+                            <div class="float-right">
+                               <small class="text-muted">
+                                    {% if msg.is_for_me == true %}
+                                        Otrzymano
+                                    {% else %}
+                                        Wysłano
+                                    {% endif %}
+                               </small>
+                            </div>
+                        <br>
+                            <p class="mb-1">{{ msg.content }}</p>
+                            <hr>
+                            <small>{{ msg.created_at|date('H:i') }}</small>
+                            <div class="float-right">
+                                <small class="text-muted">dnia {{ msg.created_at|date('d-m-Y') }}</small>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%  endfor %}
+</div>

@@ -1,0 +1,9 @@
+{% if app.user.canTextWith.empty %}
+    <div class="alert alert-info">Wysłanie wiadomości do innego użytkownika będzie możliwe po zawarciu transakcji. Zapraszamy do sekcji: Kupuję</div>
+{% endif %}
+
+{% for recipient in app.user.canTextWith %}
+
+    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick='loadForm(this.value, "{{ path("load_send_message_form") }}")' value="{{ recipient.id }}">{{ recipient.email }}</button>
+
+{% endfor %}

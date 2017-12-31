@@ -1,0 +1,17 @@
+<div class="list-group">
+{% if app.user.systemMessagesArray.empty %}
+    <div class="alert alert-info">Brak zawartości do wyświetlenia</div>
+{% endif %}
+{% for sysMsg in app.user.systemMessagesArray %}
+
+
+    <div class="list-group-item flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ sysMsg.tittle }}</h5>
+            <small>{{ sysMsg.createdAt|date('d-m-Y H:i') }}</small>
+        </div>
+        <p class="mb-1"><div class="alert alert-success">{{ sysMsg.content }}</div></p>
+    </div>
+
+{% endfor %}
+</div>

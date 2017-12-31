@@ -1,0 +1,38 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+    role_hierarchy:
+        ROLE_USER: [ROLE_ALLOWED_TO_SWITCH]
+    encoders:
+        AppBundle\Entity\User: bcrypt
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        user_privider:
+            entity: { class: AppBundle\Entity\User, property: email }
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+            # activate different ways to authenticate
+
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+            #http_basic: ~
+
+            # https://symfony.com/doc/current/security/form_login_setup.html
+            form_login:
+                login_path: login
+                check_path: login
+            guard:
+                authenticators:
+                    - app.security.login_form_authenticators
+            logout:
+                path: /logout
+            switch_user: true
+    access_control:
+        - { path: ^/account, roles: ROLE_USER }
+        - { path: ^/messages, roles: ROLE_USER }
+        - { path: ^/sale, roles: ROLE_USER }

@@ -1,0 +1,43 @@
+AppBundle\Entity\User:
+    user_{1..20}:
+        email: '<email()>'
+        password: 'some_pass_encoded'
+        company: '<username()>'
+        nip: '<numberBetween(10000000,100000000)>'
+        regon: '<numberBetween(10000000,1000000000)>'
+        isActive: '<boolean(60)>'
+        credit: '<numberBetween(1,500000)>'
+#        __calls:
+#            - addUserToTextWith:
+#                0 (unique): '@user_<current()>'
+AppBundle\Entity\Message:
+    message_{1..100}:
+        content: '<text(300)>'
+        sender: '@user_<numberBetween(1,20)>'
+        createdAt: '<dateTimeBetween(" -1000 days", "now")>'
+        user: '@user_<numberBetween(1,20)>'
+AppBundle\Entity\SystemMessage:
+    system_message_{1..50}:
+        user: '@user_<numberBetween(1,20)>'
+        tittle: '<text(20)>'
+        content: '<text(300)>'
+        createdAt: '<dateTimeBetween(" -1000 days", "now")>'
+AppBundle\Entity\Category:
+    category_{1..10}:
+        name: '<text(20)>'
+        createdAt: '<dateTimeBetween(" -1000 days", "now")>'
+AppBundle\Entity\Shipment:
+    shipment_1:
+        type: 'Paleta'
+        createdAt: '<dateTimeBetween(" -1000 days", "now")>'
+    shipment_2:
+        type: 'Karton'
+        createdAt: '<dateTimeBetween(" -1000 days", "now")>'
+    shipment_3:
+        type: 'Kontener'
+        createdAt: '<dateTimeBetween(" -1000 days", "now")>'
+AppBundle\Entity\WhoPaysOption:
+    option_1:
+        option: 'Sprzedający'
+    option_2:
+        option: 'Kupujący'
